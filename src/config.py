@@ -36,7 +36,7 @@ class AppConfig:
         whisper_model = getattr(args, "whisper_model", None) or os.getenv("AUTOVID_WHISPER_MODEL", "small")
         ollama_url = getattr(args, "ollama_url", None) or os.getenv("OLLAMA_URL", "http://localhost:11434")
         ollama_model = getattr(args, "ollama_model", None) or os.getenv("OLLAMA_MODEL", "qwen2.5:7b")
-        groq_model = getattr(args, "groq_model", None) or os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+        groq_model = getattr(args, "groq_model", None) or os.getenv("GROQ_MODEL", "qwen/qwen3.6-27b")
         output_dir = Path(getattr(args, "output_dir", "outputs")).expanduser().resolve()
         stop_after = getattr(args, "stop_after", None)
         batch_size = int(getattr(args, "batch_size", 20))

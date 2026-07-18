@@ -26,6 +26,10 @@ class DubbingPipeline:
         self.logger.stage("AutoVid Dubbing Pipeline")
         self.logger.info(f"Job directory: {paths.job_dir}")
         self.logger.info(f"Translator: {self.config.translator}")
+        if self.config.translator == "groq":
+            self.logger.info(f"Groq model: {self.config.groq_model}")
+        if self.config.translator == "ollama":
+            self.logger.info(f"Ollama model: {self.config.ollama_model}")
         self.logger.info(f"Voice: {self.config.voice}")
 
         if self.config.dry_run:
@@ -112,6 +116,8 @@ class DubbingPipeline:
             "source_url": url,
             "job_dir": str(paths.job_dir),
             "translator": self.config.translator,
+            "groq_model": self.config.groq_model if self.config.translator == "groq" else None,
+            "ollama_model": self.config.ollama_model if self.config.translator == "ollama" else None,
             "voice": self.config.voice,
             "whisper_model": self.config.whisper_model,
             "duration_seconds": (metadata or {}).get("duration_seconds"),
@@ -140,4 +146,3 @@ class DubbingPipeline:
         ]
         for stage in stages:
             self.logger.info(f"Would run: {stage}")
-

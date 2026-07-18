@@ -50,7 +50,7 @@ uv run autovid "https://www.youtube.com/watch?v=..."
 Run with a specific Groq model:
 
 ```bash
-uv run autovid "https://www.youtube.com/watch?v=..." --groq-model llama-3.1-8b-instant
+uv run autovid "https://www.youtube.com/watch?v=..." --groq-model qwen/qwen3.6-27b
 ```
 
 Run with local Ollama translation:
