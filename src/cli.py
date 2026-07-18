@@ -19,7 +19,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--translator",
         default=None,
         choices=["passthrough", "ollama", "groq"],
-        help="Translation backend. Defaults to AUTOVID_TRANSLATOR or ollama.",
+        help="Translation backend. Defaults to AUTOVID_TRANSLATOR or groq.",
     )
     parser.add_argument("--voice", default=None, help="edge-tts voice name.")
     parser.add_argument("--whisper-model", default=None, help="Faster Whisper model size or path.")

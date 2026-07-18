@@ -326,8 +326,8 @@ Main responsibilities:
 Translator backends:
 
 - `passthrough`: useful for testing English videos.
-- `ollama`: local/free translation backend.
-- `groq`: optional cloud/free-tier backend if API key is available.
+- `groq`: default cloud/free-tier backend if API key is available.
+- `ollama`: optional local/free translation backend.
 
 Why this architecture:
 
@@ -522,4 +522,3 @@ Benefit:
 ```text
 The project is built as a modular Python pipeline. The CLI collects the YouTube URL and runtime options, then the pipeline creates a job folder and runs each stage. First it downloads the video with yt-dlp, then extracts clean WAV audio with ffmpeg. Faster Whisper transcribes the audio into timestamped segments. Those segments are translated into natural English using a pluggable translator, usually Ollama for local free translation. Then edge-tts generates one audio clip per translated segment. The aligner places each clip back at the original timestamp, and finally ffmpeg replaces the original audio with the dubbed track while copying the video stream unchanged.
 ```
-

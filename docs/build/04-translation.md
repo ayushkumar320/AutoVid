@@ -29,11 +29,11 @@ groq
 openai
 ```
 
-Implement in this order:
+Current implementation priority:
 
 1. `passthrough`
-2. `ollama`
-3. `groq` if needed
+2. `groq`
+3. `ollama`
 4. `openai` only if you choose to use a paid/high quality API
 
 ## Ollama Integration
@@ -64,6 +64,13 @@ Run with Ollama:
 uv run autovid "YOUTUBE_URL" --translator ollama --ollama-model qwen2.5:7b --stop-after translation
 ```
 
+Run with default Groq:
+
+```bash
+export GROQ_API_KEY="your_groq_api_key"
+uv run autovid "YOUTUBE_URL" --stop-after translation
+```
+
 Expected:
 
 - `translated_segments.json` exists.
@@ -76,5 +83,5 @@ Expected:
 ```text
 Implement Phase 4 from docs/build/04-translation.md.
 
-Add a translator interface with passthrough and Ollama backends in src/translator.py. The Ollama backend should call the local Ollama HTTP API, batch transcript segments, ask for valid JSON only, parse responses robustly, and save translated_segments.json. Add CLI options --translator, --ollama-url, --ollama-model, and --stop-after translation. Keep Groq/OpenAI as clean future extension points, but do not require paid APIs.
+Add a translator interface with passthrough, Groq, and Ollama backends in src/translator.py. The Groq backend should use GROQ_API_KEY by default, batch transcript segments, ask for valid JSON only, parse responses robustly, and save translated_segments.json. Add CLI options --translator, --groq-model, --ollama-url, --ollama-model, and --stop-after translation. Keep Ollama as a local fallback and OpenAI as a future extension point.
 ```

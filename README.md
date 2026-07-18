@@ -6,7 +6,8 @@ AutoVid is a local Python dubbing pipeline for the internship assignment. It acc
 
 - `uv`
 - `ffmpeg`
-- Ollama, optional but recommended for free local translation
+- Groq API key for default translation
+- Ollama, optional local fallback
 
 Install `ffmpeg` on macOS:
 
@@ -20,7 +21,13 @@ Install dependencies:
 uv sync
 ```
 
-Optional Ollama model:
+Default Groq setup:
+
+```bash
+export GROQ_API_KEY="your_groq_api_key"
+```
+
+Optional Ollama fallback model:
 
 ```bash
 ollama pull qwen2.5:7b
@@ -32,6 +39,18 @@ Dry run:
 
 ```bash
 uv run autovid "https://www.youtube.com/watch?v=..." --dry-run
+```
+
+Run with default Groq translation:
+
+```bash
+uv run autovid "https://www.youtube.com/watch?v=..."
+```
+
+Run with a specific Groq model:
+
+```bash
+uv run autovid "https://www.youtube.com/watch?v=..." --groq-model llama-3.1-8b-instant
 ```
 
 Run with local Ollama translation:
@@ -97,7 +116,7 @@ outputs/<job_id>/
 ## Translation Backends
 
 - `passthrough`: testing only, returns original transcript text.
-- `ollama`: recommended free local translation backend.
-- `groq`: optional fast cloud backend using `GROQ_API_KEY`.
+- `groq`: default fast cloud backend using `GROQ_API_KEY`.
+- `ollama`: optional free local translation backend.
 
 OpenAI is not required for the MVP.

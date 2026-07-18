@@ -25,7 +25,7 @@ outputs/<job_id>/
 {
   "source_url": "...",
   "job_id": "...",
-  "translator": "ollama",
+  "translator": "groq",
   "voice": "en-IN-PrabhatNeural",
   "duration_seconds": 1800,
   "segment_count": 320,
@@ -72,4 +72,3 @@ Implement Phase 7 from docs/build/07-validation-and-submission.md.
 
 Add run summary tracking, processing time measurements, validation checks, and final CLI summary output. Update README.md with setup, usage, output folder structure, backend options, and submission notes. Make sure the project clearly records source URL, translator, voice, segment count, output paths, and total processing time.
 ```
-

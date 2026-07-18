@@ -126,7 +126,7 @@ PassthroughTranslator
 ## Recommended Environment Variables
 
 ```text
-AUTOVID_TRANSLATOR=ollama
+AUTOVID_TRANSLATOR=groq
 OLLAMA_MODEL=qwen2.5:7b
 GROQ_API_KEY=...
 OPENAI_API_KEY=...
@@ -162,4 +162,3 @@ Return:
 Implement Ollama first because it is free and local. Keep Groq and OpenAI as optional backends. This gives you a strong story:
 
 "The system is provider-agnostic. I used a local/free translation backend for cost control, but the architecture can switch to hosted LLMs for higher throughput or quality."
-
