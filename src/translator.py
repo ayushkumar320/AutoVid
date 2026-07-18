@@ -116,20 +116,29 @@ class GroqTranslator:
             "messages": [{"role": "user", "content": prompt}],
             "temperature": 0.1,
         }
+        if self.model.startswith("qwen/"):
+            payload["reasoning_effort"] = "none"
+
         request = urllib.request.Request(
             "https://api.groq.com/openai/v1/chat/completions",
             data=json.dumps(payload).encode("utf-8"),
             headers={
                 "Content-Type": "application/json",
                 "Authorization": f"Bearer {self.api_key}",
+                "User-Agent": "AutoVid/0.1",
             },
             method="POST",
         )
         try:
             with urllib.request.urlopen(request, timeout=180) as response:
                 data = json.loads(response.read().decode("utf-8"))
+        except urllib.error.HTTPError as exc:
+            body = exc.read().decode("utf-8", errors="replace")
+            raise RuntimeError(
+                f"Groq translation request failed with HTTP {exc.code}: {body}"
+            ) from exc
         except urllib.error.URLError as exc:
-            raise RuntimeError("Groq translation request failed. Check your API key, model, and network.") from exc
+            raise RuntimeError(f"Groq translation request failed: {exc.reason}") from exc
         return str(data["choices"][0]["message"]["content"])
 
 
@@ -185,4 +194,3 @@ def parse_json_array(text: str) -> list[dict[str, Any]]:
     if not isinstance(data, list):
         raise RuntimeError("Translator response must be a JSON array.")
     return data
-
