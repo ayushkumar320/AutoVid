@@ -1,0 +1,43 @@
+[project]
+name = "autovid"
+version = "0.1.0"
+description = "Automated YouTube video dubbing pipeline that translates speech into English and remuxes dubbed audio."
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "edge-tts>=7.0.0",
+    "faster-whisper>=1.1.0",
+    "pydub>=0.25.1",
+    "rich>=13.7.0",
+    "yt-dlp>=2025.1.0",
+]
+
+[project.scripts]
+autovid = "cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.uv]
+package = true
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+py-modules = [
+    "__main__",
+    "aligner",
+    "audio",
+    "cli",
+    "config",
+    "downloader",
+    "logging_utils",
+    "models",
+    "muxer",
+    "pipeline",
+    "process",
+    "storage",
+    "transcriber",
+    "translator",
+    "tts",
+]
