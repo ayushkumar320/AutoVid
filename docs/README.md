@@ -11,6 +11,7 @@ Read the docs in this order:
 5. [Quality Strategy](./05-quality-strategy.md)
 6. [Architecture Alternatives](./06-architecture-alternatives.md)
 7. [Walkthrough Talking Points](./07-walkthrough-talking-points.md)
+8. [Code Explanation For Interview](./08-code-explanation-interview.md)
 
 For implementation, use the phase-wise build playbook:
 
