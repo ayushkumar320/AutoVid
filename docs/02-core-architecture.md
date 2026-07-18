@@ -23,7 +23,7 @@ The user provides a YouTube URL through a command-line argument or a terminal pr
 Example:
 
 ```bash
-python -m autovid "https://www.youtube.com/watch?v=..."
+uv run autovid "https://www.youtube.com/watch?v=..."
 ```
 
 ### 2. Download Video
@@ -107,16 +107,16 @@ ffmpeg -i original.mp4 -i dubbed.wav -map 0:v -map 1:a -c:v copy -c:a aac output
 
 ```mermaid
 flowchart TD
-    CLI["cli.py<br/>Argument parsing and user entrypoint"]
-    Pipeline["pipeline.py<br/>Coordinates full workflow"]
-    Downloader["downloader.py<br/>YouTube download"]
-    Audio["audio.py<br/>Audio extraction and utilities"]
-    Transcriber["transcriber.py<br/>Whisper transcription"]
-    Translator["translator.py<br/>English translation"]
-    TTS["tts.py<br/>Speech synthesis"]
-    Aligner["aligner.py<br/>Timing and audio stitching"]
-    Muxer["muxer.py<br/>Final video output"]
-    Models["models.py<br/>Shared data structures"]
+    CLI["src/cli.py<br/>Argument parsing and user entrypoint"]
+    Pipeline["src/pipeline.py<br/>Coordinates full workflow"]
+    Downloader["src/downloader.py<br/>YouTube download"]
+    Audio["src/audio.py<br/>Audio extraction and utilities"]
+    Transcriber["src/transcriber.py<br/>Whisper transcription"]
+    Translator["src/translator.py<br/>English translation"]
+    TTS["src/tts.py<br/>Speech synthesis"]
+    Aligner["src/aligner.py<br/>Timing and audio stitching"]
+    Muxer["src/muxer.py<br/>Final video output"]
+    Models["src/models.py<br/>Shared data structures"]
 
     CLI --> Pipeline
     Pipeline --> Downloader
@@ -150,4 +150,3 @@ flowchart LR
 ## Design Principle
 
 Each stage should be independently testable. If translation fails, transcription output should still exist. If TTS fails for one segment, the logs should show exactly which segment failed. This makes the system easier to debug and easier to explain in the walkthrough.
-

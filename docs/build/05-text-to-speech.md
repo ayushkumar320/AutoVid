@@ -43,7 +43,7 @@ en-IN-PrabhatNeural
 Run:
 
 ```bash
-python -m autovid "YOUTUBE_URL" --translator passthrough --stop-after tts
+uv run autovid "YOUTUBE_URL" --translator passthrough --stop-after tts
 ```
 
 Expected:
@@ -57,6 +57,5 @@ Expected:
 ```text
 Implement Phase 5 from docs/build/05-text-to-speech.md.
 
-Add edge-tts based speech synthesis in autovid/tts.py. Generate one MP3 file per translated segment, save a tts_manifest.json, and wire this into the pipeline. Add --voice with default en-IN-PrabhatNeural and --stop-after tts. Use async edge-tts cleanly from the synchronous pipeline.
+Add edge-tts based speech synthesis in src/tts.py. Generate one MP3 file per translated segment, save a tts_manifest.json, and wire this into the pipeline. Add --voice with default en-IN-PrabhatNeural and --stop-after tts. Use async edge-tts cleanly from the synchronous pipeline.
 ```
-

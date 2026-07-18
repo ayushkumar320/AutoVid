@@ -26,7 +26,7 @@ flowchart TD
 The MVP should run like this:
 
 ```bash
-python -m autovid "https://www.youtube.com/watch?v=..."
+uv run autovid "https://www.youtube.com/watch?v=..."
 ```
 
 And produce:
@@ -54,4 +54,3 @@ Build the system with replaceable backends:
 - Video/audio backend: `ffmpeg`.
 
 This keeps the project practical before the deadline while still sounding strong architecturally.
-

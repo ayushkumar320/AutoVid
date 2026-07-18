@@ -12,7 +12,7 @@ Deliverables:
 
 - Python package structure.
 - CLI entrypoint.
-- `requirements.txt`.
+- `pyproject.toml`.
 - Basic README.
 - Output and working directories.
 
@@ -130,7 +130,7 @@ gantt
 The MVP is complete when this works:
 
 ```bash
-python -m autovid "https://www.youtube.com/watch?v=..."
+uv run autovid "https://www.youtube.com/watch?v=..."
 ```
 
 And creates:
@@ -145,4 +145,3 @@ outputs/<job_id>/
   dubbed_output.mp4
   run_summary.json
 ```
-

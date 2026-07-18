@@ -2,11 +2,11 @@
 
 ## Goal
 
-Create a clean Python project structure for the dubbing pipeline.
+Create a clean uv-based Python project structure for the dubbing pipeline.
 
 ## Implement
 
-- Python package named `autovid`.
+- Flat source modules under `src/`.
 - CLI entrypoint.
 - Shared data models.
 - Configuration loading.
@@ -16,7 +16,7 @@ Create a clean Python project structure for the dubbing pipeline.
 ## Expected Files
 
 ```text
-autovid/
+src/
   __init__.py
   __main__.py
   cli.py
@@ -24,7 +24,7 @@ autovid/
   models.py
   pipeline.py
   logging_utils.py
-requirements.txt
+pyproject.toml
 README.md
 outputs/
 ```
@@ -34,7 +34,7 @@ outputs/
 Run:
 
 ```bash
-python -m autovid --help
+uv run autovid --help
 ```
 
 Expected:
@@ -45,7 +45,7 @@ Expected:
 Run:
 
 ```bash
-python -m autovid "https://example.com/video"
+uv run autovid "https://example.com/video"
 ```
 
 Expected:
@@ -59,6 +59,5 @@ Expected:
 ```text
 Implement Phase 1 from docs/build/01-project-scaffold.md.
 
-Create a clean Python package named autovid with CLI support, config loading, shared dataclasses, logging helpers, and a placeholder pipeline. The command should support a YouTube URL argument, --output-dir, --translator, --voice, and --dry-run. Add requirements.txt and a root README.md with setup and usage instructions. Keep the code modular and ready for later phases.
+Create a clean uv Python project using a flat src layout. Put application modules directly under src with CLI support, config loading, shared dataclasses, logging helpers, and a placeholder pipeline. The command should support a YouTube URL argument, --output-dir, --translator, --voice, and --dry-run. Add pyproject.toml and a root README.md with setup and usage instructions. Keep the code modular and ready for later phases.
 ```
-

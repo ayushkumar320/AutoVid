@@ -46,7 +46,7 @@ Use `medium` if quality is poor and processing time is acceptable.
 Run:
 
 ```bash
-python -m autovid "YOUTUBE_URL" --stop-after transcript
+uv run autovid "YOUTUBE_URL" --stop-after transcript
 ```
 
 Expected:
@@ -61,6 +61,5 @@ Expected:
 ```text
 Implement Phase 3 from docs/build/03-transcription.md.
 
-Add a Faster Whisper transcription backend in autovid/transcriber.py. Wire it into the pipeline after audio extraction. Save transcript.json and transcript.txt. Add --whisper-model with default small and --stop-after transcript. Use the existing dataclasses or add clean dataclasses if needed. Print detected language, segment count, and output paths.
+Add a Faster Whisper transcription backend in src/transcriber.py. Wire it into the pipeline after audio extraction. Save transcript.json and transcript.txt. Add --whisper-model with default small and --stop-after transcript. Use the existing dataclasses or add clean dataclasses if needed. Print detected language, segment count, and output paths.
 ```
-

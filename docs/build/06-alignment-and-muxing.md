@@ -54,7 +54,7 @@ ffmpeg -i source.mp4 -i dubbed.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -sho
 Run:
 
 ```bash
-python -m autovid "YOUTUBE_URL" --translator passthrough
+uv run autovid "YOUTUBE_URL" --translator passthrough
 ```
 
 Expected:
@@ -70,6 +70,5 @@ Expected:
 ```text
 Implement Phase 6 from docs/build/06-alignment-and-muxing.md.
 
-Add aligner.py to stitch per-segment TTS audio into dubbed.wav using original timestamps and silence insertion. Add muxer.py to replace the source video audio with dubbed.wav using ffmpeg while copying the video stream. Wire both into the pipeline and save dubbed_output.mp4. Add clear logs and include output paths in the final summary.
+Add src/aligner.py to stitch per-segment TTS audio into dubbed.wav using original timestamps and silence insertion. Add src/muxer.py to replace the source video audio with dubbed.wav using ffmpeg while copying the video stream. Wire both into the pipeline and save dubbed_output.mp4. Add clear logs and include output paths in the final summary.
 ```
-

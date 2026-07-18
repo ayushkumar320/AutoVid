@@ -14,7 +14,7 @@ Download the YouTube video and extract clean audio for transcription.
 ## Expected Files
 
 ```text
-autovid/
+src/
   downloader.py
   audio.py
 outputs/<job_id>/
@@ -48,7 +48,7 @@ This is friendly for Whisper.
 Run with a short video:
 
 ```bash
-python -m autovid "YOUTUBE_URL" --stop-after audio
+uv run autovid "YOUTUBE_URL" --stop-after audio
 ```
 
 Expected:
@@ -63,6 +63,5 @@ Expected:
 ```text
 Implement Phase 2 from docs/build/02-download-and-audio-extraction.md.
 
-Add yt-dlp based video downloading and ffmpeg based audio extraction. Create downloader.py and audio.py, wire them into the pipeline, and add a --stop-after audio option so the pipeline can stop after source.wav is produced. Save metadata.json in the job output folder. Use subprocess safely and print clear progress logs.
+Add yt-dlp based video downloading and ffmpeg based audio extraction. Create src/downloader.py and src/audio.py, wire them into the pipeline, and add a --stop-after audio option so the pipeline can stop after source.wav is produced. Save metadata.json in the job output folder. Use subprocess safely and print clear progress logs.
 ```
-
