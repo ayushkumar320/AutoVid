@@ -46,6 +46,7 @@ For the MVP:
 - Use natural neural English voices from `edge-tts`.
 - Let the user choose the voice.
 - Use Indian English voices for Indian source videos when appropriate.
+- Tune TTS rate, pitch, and volume using original segment loudness and speaking pace.
 
 Suggested defaults:
 
@@ -110,4 +111,3 @@ Good logs make the project easier to debug and also look more professional durin
 | TTS segments do not match timing | Use timestamp-based stitching and mild speed adjustment |
 | YouTube download fails | Use `yt-dlp`, show clear error messages |
 | Voice does not match original perfectly | Explain MVP uses natural voice matching, with voice cloning as future work |
-

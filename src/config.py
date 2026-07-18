@@ -28,6 +28,7 @@ class AppConfig:
     stop_after: str | None
     dry_run: bool
     batch_size: int
+    expressive_tts: bool
 
     @classmethod
     def from_args(cls, args: object) -> "AppConfig":
@@ -57,6 +58,7 @@ class AppConfig:
             stop_after=stop_after,
             dry_run=bool(getattr(args, "dry_run", False)),
             batch_size=batch_size,
+            expressive_tts=not bool(getattr(args, "flat_tts", False)),
         )
 
 

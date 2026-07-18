@@ -16,9 +16,10 @@ flowchart LR
     D --> E["Audio extraction<br/>src/audio.py"]
     E --> F["Transcription<br/>src/transcriber.py"]
     F --> G["Translation<br/>src/translator.py"]
-    G --> H["TTS<br/>src/tts.py"]
-    H --> I["Alignment<br/>src/aligner.py"]
-    I --> J["Muxing<br/>src/muxer.py"]
+    G --> H["Energy analysis<br/>src/energy.py"]
+    H --> I["TTS<br/>src/tts.py"]
+    I --> L["Alignment<br/>src/aligner.py"]
+    L --> J["Muxing<br/>src/muxer.py"]
     J --> K["Final video"]
 ```
 
@@ -366,6 +367,26 @@ Why one file per segment:
 Interview explanation:
 
 "Instead of generating one large TTS file, I generate speech per segment. That gives me better timing control and makes debugging easier."
+
+### `src/energy.py`
+
+This file estimates the original speaker's delivery energy.
+
+Main responsibilities:
+
+- Reads `source.wav`.
+- Measures loudness for each timestamped segment.
+- Estimates speaking pace from source text length and segment duration.
+- Maps those signals into TTS `rate`, `pitch`, and `volume`.
+- Saves `energy_profiles.json`.
+
+Why this matters:
+
+The assignment asks for the same energy as the original. This is not full emotion cloning, but it makes the dub less flat by carrying over delivery cues from the source audio.
+
+Interview explanation:
+
+"I added an expressive TTS layer that analyzes original segment loudness and speaking speed, then maps that into edge-tts rate, pitch, and volume. It helps preserve energy without requiring heavy voice-cloning models."
 
 ### `src/aligner.py`
 

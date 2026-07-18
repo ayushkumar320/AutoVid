@@ -28,6 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--groq-model", default=None, help="Groq model name.")
     parser.add_argument("--batch-size", type=int, default=20, help="Translation segment batch size.")
     parser.add_argument("--dry-run", action="store_true", help="Create job folder and print stages only.")
+    parser.add_argument("--flat-tts", action="store_true", help="Disable energy-based TTS rate/pitch/volume tuning.")
     parser.add_argument(
         "--stop-after",
         choices=sorted(STOP_STAGES),

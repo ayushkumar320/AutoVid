@@ -4,7 +4,7 @@ import asyncio
 from pathlib import Path
 
 from logging_utils import Logger
-from models import TTSClip, TranslatedSegment
+from models import EnergyProfile, TTSClip, TranslatedSegment
 from storage import write_json
 
 
@@ -18,8 +18,9 @@ class EdgeTTSGenerator:
         segments: list[TranslatedSegment],
         output_dir: Path,
         manifest_path: Path,
+        energy_profiles: dict[int, EnergyProfile] | None = None,
     ) -> list[TTSClip]:
-        clips = asyncio.run(self._synthesize_async(segments, output_dir))
+        clips = asyncio.run(self._synthesize_async(segments, output_dir, energy_profiles or {}))
         write_json(manifest_path, [clip.to_dict() for clip in clips])
         self.logger.success(f"Generated {len(clips)} TTS clips")
         return clips
@@ -28,6 +29,7 @@ class EdgeTTSGenerator:
         self,
         segments: list[TranslatedSegment],
         output_dir: Path,
+        energy_profiles: dict[int, EnergyProfile],
     ) -> list[TTSClip]:
         try:
             import edge_tts
@@ -38,8 +40,22 @@ class EdgeTTSGenerator:
         for segment in segments:
             path = output_dir / f"{segment.index:04d}.mp3"
             text = segment.english_text.strip() or segment.source_text
-            self.logger.info(f"Generating TTS segment {segment.index}")
-            communicate = edge_tts.Communicate(text=text, voice=self.voice)
+            profile = energy_profiles.get(segment.index)
+            rate = profile.tts_rate if profile else "+0%"
+            pitch = profile.tts_pitch if profile else "+0Hz"
+            volume = profile.tts_volume if profile else "+0%"
+            label = profile.label if profile else "neutral"
+            self.logger.info(
+                f"Generating TTS segment {segment.index} "
+                f"energy={label} rate={rate} pitch={pitch} volume={volume}"
+            )
+            communicate = edge_tts.Communicate(
+                text=text,
+                voice=self.voice,
+                rate=rate,
+                pitch=pitch,
+                volume=volume,
+            )
             await communicate.save(str(path))
             clips.append(
                 TTSClip(
@@ -48,7 +64,10 @@ class EdgeTTSGenerator:
                     start=segment.start,
                     end=segment.end,
                     english_text=text,
+                    rate=rate,
+                    pitch=pitch,
+                    volume=volume,
+                    energy_label=label,
                 )
             )
         return clips
-

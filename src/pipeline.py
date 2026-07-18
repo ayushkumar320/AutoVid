@@ -7,6 +7,7 @@ from aligner import AudioAligner
 from audio import AudioProcessor
 from config import AppConfig
 from downloader import VideoDownloader
+from energy import EnergyAnalyzer
 from logging_utils import Logger
 from muxer import VideoMuxer
 from storage import create_run_paths, write_json
@@ -31,6 +32,7 @@ class DubbingPipeline:
         if self.config.translator == "ollama":
             self.logger.info(f"Ollama model: {self.config.ollama_model}")
         self.logger.info(f"Voice: {self.config.voice}")
+        self.logger.info(f"Expressive TTS: {self.config.expressive_tts}")
 
         if self.config.dry_run:
             self._write_summary(paths, url, started_at, status="dry_run")
@@ -67,10 +69,18 @@ class DubbingPipeline:
             return
 
         self.logger.stage("5. Text To Speech")
+        energy_profiles = None
+        if self.config.expressive_tts:
+            energy_profiles = EnergyAnalyzer(self.logger).analyze(
+                paths.source_audio,
+                translated_segments,
+                paths.job_dir / "energy_profiles.json",
+            )
         clips = EdgeTTSGenerator(self.config.voice, self.logger).synthesize(
             translated_segments,
             paths.tts_dir,
             paths.tts_manifest,
+            energy_profiles,
         )
         if self._should_stop("tts", paths, url, started_at, metadata, len(segments)):
             return
@@ -119,6 +129,7 @@ class DubbingPipeline:
             "groq_model": self.config.groq_model if self.config.translator == "groq" else None,
             "ollama_model": self.config.ollama_model if self.config.translator == "ollama" else None,
             "voice": self.config.voice,
+            "expressive_tts": self.config.expressive_tts,
             "whisper_model": self.config.whisper_model,
             "duration_seconds": (metadata or {}).get("duration_seconds"),
             "segment_count": segment_count,

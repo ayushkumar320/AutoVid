@@ -71,6 +71,12 @@ Run with passthrough translation for English test videos:
 uv run autovid "https://www.youtube.com/watch?v=..." --translator passthrough
 ```
 
+Expressive TTS is enabled by default. It analyzes original segment energy and adjusts TTS rate, pitch, and volume. Disable it with:
+
+```bash
+uv run autovid "https://www.youtube.com/watch?v=..." --flat-tts
+```
+
 Stop after a stage:
 
 ```bash
@@ -112,6 +118,7 @@ outputs/<job_id>/
   transcript.json
   transcript.txt
   translated_segments.json
+  energy_profiles.json
   tts_segments/
   tts_manifest.json
   dubbed.wav

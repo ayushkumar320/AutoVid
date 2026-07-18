@@ -39,12 +39,31 @@ class TranslatedSegment:
 
 
 @dataclass(frozen=True)
+class EnergyProfile:
+    index: int
+    loudness_dbfs: float | None
+    loudness_delta_db: float
+    speech_rate: float
+    tts_rate: str
+    tts_pitch: str
+    tts_volume: str
+    label: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
+@dataclass(frozen=True)
 class TTSClip:
     index: int
     path: Path
     start: float
     end: float
     english_text: str
+    rate: str = "+0%"
+    pitch: str = "+0Hz"
+    volume: str = "+0%"
+    energy_label: str = "neutral"
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
@@ -66,4 +85,3 @@ class RunPaths:
     dubbed_audio: Path
     dubbed_video: Path
     run_summary: Path
-
