@@ -26,7 +26,7 @@ outputs/<job_id>/
   "source_url": "...",
   "job_id": "...",
   "translator": "groq",
-  "voice": "en-IN-PrabhatNeural",
+  "voice": "en-US-JennyNeural",
   "duration_seconds": 1800,
   "segment_count": 320,
   "processing_time_seconds": 4200,

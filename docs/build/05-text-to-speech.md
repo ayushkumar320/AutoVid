@@ -37,7 +37,7 @@ en-US-JennyNeural
 Default:
 
 ```text
-en-IN-PrabhatNeural
+en-US-JennyNeural
 ```
 
 ## Acceptance Checks
@@ -60,5 +60,5 @@ Expected:
 ```text
 Implement Phase 5 from docs/build/05-text-to-speech.md.
 
-Add edge-tts based speech synthesis in src/tts.py. Generate one MP3 file per translated segment, save a tts_manifest.json, and wire this into the pipeline. Add expressive TTS by analyzing original segment loudness and pace, then mapping that to edge-tts rate, pitch, and volume. Add --voice with default en-IN-PrabhatNeural, --flat-tts to disable expressive tuning, and --stop-after tts. Use async edge-tts cleanly from the synchronous pipeline.
+Add edge-tts based speech synthesis in src/tts.py. Generate one MP3 file per translated segment, save a tts_manifest.json, and wire this into the pipeline. Add expressive TTS by analyzing original segment loudness and pace, then mapping that to edge-tts rate, pitch, and volume. Add --voice with default en-US-JennyNeural, --flat-tts to disable expressive tuning, and --stop-after tts. Use async edge-tts cleanly from the synchronous pipeline.
 ```

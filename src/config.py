@@ -34,7 +34,7 @@ class AppConfig:
     def from_args(cls, args: object) -> "AppConfig":
         load_dotenv(Path.cwd() / ".env")
         translator = getattr(args, "translator", None) or os.getenv("AUTOVID_TRANSLATOR", "groq")
-        voice = getattr(args, "voice", None) or os.getenv("AUTOVID_VOICE", "en-IN-PrabhatNeural")
+        voice = getattr(args, "voice", None) or os.getenv("AUTOVID_VOICE", "en-US-JennyNeural")
         whisper_model = getattr(args, "whisper_model", None) or os.getenv("AUTOVID_WHISPER_MODEL", "small")
         ollama_url = getattr(args, "ollama_url", None) or os.getenv("OLLAMA_URL", "http://localhost:11434")
         ollama_model = getattr(args, "ollama_model", None) or os.getenv("OLLAMA_MODEL", "qwen2.5:7b")
