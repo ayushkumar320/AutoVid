@@ -27,6 +27,12 @@ Default Groq setup:
 export GROQ_API_KEY="your_groq_api_key"
 ```
 
+Or create a local `.env` file:
+
+```text
+GROQ_API_KEY=your_groq_api_key
+```
+
 Optional Ollama fallback model:
 
 ```bash

@@ -31,6 +31,7 @@ class AppConfig:
 
     @classmethod
     def from_args(cls, args: object) -> "AppConfig":
+        load_dotenv(Path.cwd() / ".env")
         translator = getattr(args, "translator", None) or os.getenv("AUTOVID_TRANSLATOR", "groq")
         voice = getattr(args, "voice", None) or os.getenv("AUTOVID_VOICE", "en-IN-PrabhatNeural")
         whisper_model = getattr(args, "whisper_model", None) or os.getenv("AUTOVID_WHISPER_MODEL", "small")
@@ -57,3 +58,20 @@ class AppConfig:
             dry_run=bool(getattr(args, "dry_run", False)),
             batch_size=batch_size,
         )
+
+
+def load_dotenv(path: Path) -> None:
+    if not path.exists():
+        return
+
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+
+        key, value = line.split("=", 1)
+        key = key.strip()
+        value = value.strip().strip('"').strip("'")
+
+        if key:
+            os.environ.setdefault(key, value)
